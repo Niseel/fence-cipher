@@ -46,6 +46,16 @@ const decryptFenceCipher = (str, key) => {
   return result;
 };
 
+const ShitfCipherDetector = (str) => {
+  let res = [];
+  for (let index = 0; index < str.length; index++) {
+    res.push(decryptFenceCipher(str, index));
+  }
+  return res;
+};
+ShitfCipherDetector("cga4eotn1znhh0").forEach((item, index) => {
+  console.log(`${index}: ${item}`);
+});
 // console.log(decryptFenceCipher("cga4eotn1znhh0", 3));
 // var str = readlineSync.question("> Enter string you want to encrypt? ");
 // var number = readlineSync.question("> Enter 'k number' you want to encrypt? ");
