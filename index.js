@@ -46,16 +46,14 @@ const decryptFenceCipher = (str, key) => {
   return result;
 };
 
-const ShitfCipherDetector = (str) => {
+const FenceCipherDetector = (str) => {
   let res = [];
   for (let index = 0; index < str.length; index++) {
     res.push(decryptFenceCipher(str, index));
   }
   return res;
 };
-ShitfCipherDetector("cga4eotn1znhh0").forEach((item, index) => {
-  console.log(`${index}: ${item}`);
-});
+
 // console.log(decryptFenceCipher("cga4eotn1znhh0", 3));
 // var str = readlineSync.question("> Enter string you want to encrypt? ");
 // var number = readlineSync.question("> Enter 'k number' you want to encrypt? ");
@@ -64,3 +62,66 @@ ShitfCipherDetector("cga4eotn1znhh0").forEach((item, index) => {
 //   ">String after encrypt: ",
 //   encryptFenceCipher(str, parseInt(number))
 // );
+
+function showMenu() {
+  console.log("1> Encrypt string with Fence-Cipher");
+  console.log("2> Decrypt string with Fence-Cipher");
+  console.log("3> Decrypt string with Fence-Cipher without key");
+  console.log("4> End Program");
+}
+function main() {
+  showMenu();
+  let choose = readlineSync.question("> Choose your option? ");
+  switch (parseInt(choose)) {
+    case 1:
+      let plaintext = readlineSync.question(
+        "> Enter plantext you want to encrypt? "
+      );
+      var key = readlineSync.question(
+        "> Enter 'k number' you want to encrypt? "
+      );
+      console.log(
+        "> Your Ciphertext: ",
+        encryptFenceCipher(plaintext, parseInt(key))
+      );
+      console.log("\n \n");
+      console.log(
+        "============================================================="
+      );
+      main();
+      break;
+    case 2:
+      let ciphertext = readlineSync.question(
+        "> Enter ciphertext you want to decrypt? "
+      );
+      var key = readlineSync.question("> Enter 'k number' ");
+      console.log(
+        "> Your plaintext: ",
+        decryptFenceCipher(ciphertext, parseInt(key))
+      );
+      console.log("\n \n");
+      console.log(
+        "============================================================="
+      );
+      main();
+      break;
+    case 3:
+      let ciphertextToDetect = readlineSync.question(
+        "> Enter ciphertext you want to decrypt without the key? "
+      );
+      FenceCipherDetector(ciphertextToDetect).forEach((item, index) => {
+        console.log(`${index}: ${item}`);
+      });
+      console.log("\n \n");
+      console.log(
+        "============================================================="
+      );
+      main();
+      break;
+    case 4:
+      console.log("End Program");
+      break;
+  }
+}
+
+main();
